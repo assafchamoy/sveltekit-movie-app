@@ -9,8 +9,21 @@
         if(num > 0) num -= 1;
     } 
 </script>
-<div>
+<div class="countView">
+
     <h1>Count is: {num}</h1>
-    <button on:click={incNumber}>Increment</button>
-    <button on:click={decNumber}>Decrement</button>
+    <div class="buttons">
+        <button on:click={decNumber}>Decrement</button>
+        <button on:click={incNumber}>Increment</button>
+    </div>
 </div>
+
+<style>
+    .countView {
+        flex-direction: column;
+        gap: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
