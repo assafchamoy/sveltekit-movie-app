@@ -1,29 +1,9 @@
 <script>
-    let num = 0;
-
-    const incNumber = () => {
-        if(num < 10) num += 1;
-    } 
- 
-    const decNumber = () => {
-        if(num > 0) num -= 1;
-    } 
+	import MovieList from '../components/movies/MovieList.svelte';
 </script>
-<div class="countView">
 
-    <h1>Count is: {num}</h1>
-    <div class="buttons">
-        <button on:click={decNumber}>Decrement</button>
-        <button on:click={incNumber}>Increment</button>
-    </div>
-</div>
+<h1 class="title">Popular Movies</h1>
+<MovieList />
 
 <style>
-    .countView {
-        flex-direction: column;
-        gap: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 </style>

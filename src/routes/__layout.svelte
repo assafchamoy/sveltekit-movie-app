@@ -1,12 +1,25 @@
+<script lang="ts">
+	import Container from '../components/Container.svelte';
+
+	import NavBar, { type Route } from '../components/NavBar.svelte';
+	const routesList: Route[] = [
+		{ path: '/', name: 'Home' },
+		{ path: '/about', name: 'About' }
+	];
+</script>
+
+<svelte:head>
+	<title>Movie Searcher</title>
+</svelte:head>
+
 <div class="appContainer">
-    <nav class="navBar">
-        <a class="link" href="/">Home</a>
-        <a class="link" href="/about">About</a>
-    </nav>
-    <slot />  
-    <footer class="foot">Movie App inc</footer>
+	<NavBar {routesList} />
+	<Container>
+		<slot />
+	</Container>
+	<footer class="foot">Movie App inc</footer>
 </div>
 
 <style>
-    @import '../../static/global.css';
+	@import '../global.css';
 </style>

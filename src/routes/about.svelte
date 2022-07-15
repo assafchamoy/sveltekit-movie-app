@@ -1,5 +1,4 @@
-<div class="aboutDiv">
-    <h1 class="title">About</h1>
-</div>
+
+<h1 class="title">About</h1>
 <style>
 </style>
