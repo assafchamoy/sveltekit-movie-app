@@ -5,7 +5,7 @@
 
 	export let movie: IMovie | IMovieDetails;
 	const baseImgUrl = import.meta.env.VITE_MOVIE_IMAGES_BASE_URL;
-	const imgUrl = movie.backdrop_path ? baseImgUrl + movie.backdrop_path : no_image;
+	const imgUrl = movie.poster_path ? baseImgUrl + movie.poster_path : no_image;
 </script>
 
 <img class="movie_img" src={imgUrl} alt={`${movie.original_title}_poster`} />

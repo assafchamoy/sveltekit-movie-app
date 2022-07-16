@@ -35,6 +35,7 @@
 
 <style>
 	.inp {
+
 		position: relative;
 		margin: auto;
 		width: 90%;
@@ -66,6 +67,7 @@
 		transform-origin: left;
 	}
 	.inp input {
+		text-align: center;
 		-webkit-appearance: none;
 		-moz-appearance: none;
 		appearance: none;

@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { fetchPopularMovieList, popularMovies } from '../../stores/popularMovies.store';
+	import { moviesList } from '../../stores/moviesList.store';
+	import { fetchPopularMovieList } from '../../stores/popularMovies.store';
 	import MovieItem from './MovieItem.svelte';
 	let movieListRef: HTMLDivElement;
 
@@ -10,17 +11,17 @@
 
 		if (bottomScrollOffset <= FETCH_MORE_THRESHOLD) {
 			const shouldFetchMore =
-				!$popularMovies.isLoading && $popularMovies.movies.length < $popularMovies.total;
+				!$moviesList.isLoading && $moviesList.movies.length < $moviesList.total;
 			if (shouldFetchMore) {
-				$popularMovies = { ...$popularMovies, isLoading: true };
-				fetchPopularMovieList({ page: $popularMovies.page + 1 });
+				$moviesList = { ...$moviesList, isLoading: true };
+				fetchPopularMovieList({ page: $moviesList.page + 1 });
 			}
 		}
 	};
 </script>
 
 <div class="movie_list" bind:this={movieListRef} on:scroll={handleInfiniteScroll}>
-	{#each $popularMovies.movies as movie (movie.id)}
+	{#each $moviesList.movies as movie (movie.id)}
 		<MovieItem {movie} />
 	{/each}
 </div>
