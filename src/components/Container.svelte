@@ -5,8 +5,9 @@
 <style>
 	:global(.container) {
         width:100vw;
-        padding: 20px;
+        /* padding: 20px; */
         overflow: hidden;
+		height:100%;
 	}
 
 	:global(.container > div) {

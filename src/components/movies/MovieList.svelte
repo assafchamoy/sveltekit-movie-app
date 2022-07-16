@@ -1,50 +1,38 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { fetchPopularMovieList, popularMovies } from '../../stores/popularMovies.store';
+	import MovieItem from './MovieItem.svelte';
+	let movieListRef: HTMLDivElement;
 
-	import { popularMovies } from '../../stores/popularMovies.store';
+	const handleInfiniteScroll = (): void => {
+		const FETCH_MORE_THRESHOLD = 400;
+		const { scrollHeight, clientHeight, scrollTop } = movieListRef;
+		const bottomScrollOffset = scrollHeight - clientHeight - scrollTop;
 
-	console.log($popularMovies.length);
-
-	let baseImgUrl = import.meta.env.VITE_MOVIE_IMAGES_BASE_URL;
-
+		if (bottomScrollOffset <= FETCH_MORE_THRESHOLD) {
+			const shouldFetchMore =
+				!$popularMovies.isLoading && $popularMovies.movies.length < $popularMovies.total;
+			if (shouldFetchMore) {
+				$popularMovies = { ...$popularMovies, isLoading: true };
+				fetchPopularMovieList({ page: $popularMovies.page + 1 });
+			}
+		}
+	};
 </script>
 
-<div class="movie_list">
-	{#each $popularMovies as movie}
-		<div class="movie">
-			<h4>{movie.title}</h4>
-			<h4>Rate: {movie.vote_average}</h4>
-			<img
-				class="movie_img"
-				src={baseImgUrl + movie.backdrop_path}
-				alt={`${movie.original_title}_poster`}
-			/>
-		</div>
+<div class="movie_list" bind:this={movieListRef} on:scroll={handleInfiniteScroll}>
+	{#each $popularMovies.movies as movie (movie.id)}
+		<MovieItem {movie} />
 	{/each}
 </div>
 
 <style>
-	.movie_img {
-		height: 150px;
-		width: 100%;
-		object-fit: cover;
-	}
-	.movie {
-		display: flex;
-		flex-direction: column;
-		border: 1px solid rgba(0, 0, 0, 0.119);
-		border-radius: 0.2rem;
-		width: 300px;
-		padding: 30px;
-		gap: 10px;
-		text-align: center;
-		justify-content: space-evenly;
-	}
 	.movie_list {
-		width: 100%;
-		height: 100%;
+		width: calc(100% - 10px);
+		height: 70%;
 		gap: 20px;
 		justify-content: center;
 		overflow-y: auto;
+		flex-direction: row;
+		margin-top: 20px;
 	}
 </style>

@@ -17,7 +17,7 @@
 	<Container>
 		<slot />
 	</Container>
-	<footer class="foot">Movie App inc</footer>
+	<!-- <footer class="foot">Movie App inc</footer> -->
 </div>
 
 <style>
