@@ -1,21 +1,18 @@
-import MoviesApi from '$lib/api/MoviesApi';
-import type { RequestHandler } from './__types/[query]';
+import MoviesApi, { type ServiceError } from '$lib/api/MoviesApi';
+import type { ISearchResult } from '../../interfaces/Movies/searchResult.response';
+import type { RequestHandler } from './__types/[query].js';
 
 const moviesApi = new MoviesApi();
 
-export const GET: RequestHandler = async ({ params: { query } }) => {
-	const searchRes = await moviesApi.searchMovie(query, 1);
-	console.log('here2?', searchRes);
+type getResponseBody = {
+	searchResults: ISearchResult | ServiceError;
+}
 
-	if (searchRes.results) {
-		return {
-			status: 200,
-			body: { searchResults: searchRes.results }
-		};
-	}
+export const get: RequestHandler<getResponseBody> = async ({ params: { query } }) => {
+	const searchRes = await moviesApi.searchMovie({ page: 1, query });
 
 	return {
-		status: 404,
-		body: { error: searchRes.error }
+		status: 200,
+		body: {searchResults: searchRes}
 	};
 };
