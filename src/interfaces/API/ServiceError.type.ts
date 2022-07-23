@@ -1,0 +1,1 @@
+export type ServiceError = { title: string; error: string } | null;

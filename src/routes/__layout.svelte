@@ -36,7 +36,6 @@
 		{/if}
 		<slot />
 	</Container>
-	<!-- <footer class="foot">Movie App inc</footer> -->
 </div>
 
 <style>

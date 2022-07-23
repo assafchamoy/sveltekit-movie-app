@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	import { fetchMovieDetails, moviesDetails } from '../../stores/moviesDetails.store';
 
 	import type { Load } from './__types/[id=integer]';
@@ -11,36 +11,35 @@
 			}
 		};
 	};
-</script>
+</script> -->
 
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import MovieImage from '../../components/movies/MovieImage.svelte';
 	import type { IMovieDetails } from '../../interfaces/Movies/movieDetails.entity';
 
-	export let movieId: string;
-	let selectedMovie = $moviesDetails.details.get(movieId) as IMovieDetails;
-	let productionCountriesNames = selectedMovie.production_countries.map((c) => c.name);
+	export let movieDetails: IMovieDetails;
+	let productionCountriesNames = movieDetails.production_countries.map((c) => c.name);
 </script>
 
 <a href="/">Go Back</a>
 
 <div class="movie_details_container" in:fade>
-	<h1 class="title">{selectedMovie?.title}</h1>
+	<h1 class="title">{movieDetails?.title}</h1>
 	<div class="movie_details">
-		<MovieImage movie={selectedMovie} --height="300px" />
+		<MovieImage movie={movieDetails} --height="300px" />
 		<div class="details_section">
-			<p>{selectedMovie.overview}</p>
+			<p>{movieDetails.overview}</p>
 			<p>Production Countries:</p>
 			<ul class="countries_list">
 				{#each productionCountriesNames as countryName}
 					<li>{countryName}</li>
 				{/each}
 			</ul>
-			<p class="release_date">Release date: {selectedMovie.release_date}</p>
+			<p class="release_date">Release date: {movieDetails.release_date}</p>
 			<div class="rating_box">
 				<p>Rating</p>
-				{selectedMovie.vote_average}
+				{movieDetails.vote_average}
 			</div>
 		</div>
 	</div>

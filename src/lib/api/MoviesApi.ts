@@ -1,27 +1,48 @@
-import type { JSONValue } from '@sveltejs/kit/types/private';
 import requestHandler from '../../axios';
+import type { ServiceError } from '../../interfaces/API/ServiceError.type';
+import type { IMovieDetails } from '../../interfaces/Movies/movieDetails.entity';
 import type IPopularMoviesResponse from '../../interfaces/Movies/popularMovies.response';
 import type { ISearchResult } from '../../interfaces/Movies/searchResult.response';
-
-export type ServiceError = { title: string; error: string } | null;
 
 interface BaseMoviesParams {
 	language?: 'he' | 'en-US';
 	page: number;
 }
 
-interface SearchMoviesParams {
+type PopularMoviesParams = BaseMoviesParams;
+
+interface SearchMoviesParams extends BaseMoviesParams {
 	query: string;
 }
+
+interface MovieDetailsParams extends Omit<BaseMoviesParams, 'page'> {
+	id: string;
+}
+
 export default class MoviesApi {
 	/**
 	 * A util class to integrate with https://developers.themoviedb.org/ API.
 	 */
 
-	public fetchPopularMovieList = async ({
+	public async fetchMovieDetails({
 		language = 'en-US',
 		...rest
-	}: BaseMoviesParams): Promise<IPopularMoviesResponse | ServiceError> => {
+	}: MovieDetailsParams): Promise<IMovieDetails | ServiceError> {
+		try {
+			const movieDetailsRes = await requestHandler
+				.get<IMovieDetails>(`movie/${rest.id}`, { params: { language } })
+				.then((res) => res.data);
+
+			return movieDetailsRes;
+		} catch (e) {
+			return { title: 'There was an error fetching the movie data', error: e as string };
+		}
+	}
+
+	public async fetchPopularMovieList({
+		language = 'en-US',
+		...rest
+	}: PopularMoviesParams): Promise<IPopularMoviesResponse | ServiceError> {
 		try {
 			const popularMoviesRes = await requestHandler
 				.get<IPopularMoviesResponse>('movie/popular', { params: { language, ...rest } })
@@ -31,12 +52,12 @@ export default class MoviesApi {
 		} catch (e) {
 			return { title: 'There was an error fetching the movies..', error: e as string };
 		}
-	};
+	}
 
 	public async searchMovie({
 		language = 'en-US',
 		...rest
-	}: BaseMoviesParams & SearchMoviesParams): Promise<ISearchResult | ServiceError> {
+	}: SearchMoviesParams): Promise<ISearchResult | ServiceError> {
 		try {
 			const searchResults = await requestHandler
 				.get<ISearchResult>('search/movie', { params: { language, ...rest } })
