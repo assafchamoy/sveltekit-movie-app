@@ -12,7 +12,6 @@
 		};
 	};
 </script> -->
-
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import MovieImage from '../../components/movies/MovieImage.svelte';
@@ -22,11 +21,13 @@
 	let productionCountriesNames = movieDetails.production_countries.map((c) => c.name);
 </script>
 
-<button on:click={() => {
-	history.back()
-}}>Go Back</button>
-
 <div class="movie_details_container" in:fade>
+	<button
+		class="go_back_btn"
+		on:click={() => {
+			history.back();
+		}}>Go Back</button
+	>
 	<h1 class="title">{movieDetails?.title}</h1>
 	<div class="movie_details">
 		<MovieImage movie={movieDetails} --height="300px" />
@@ -61,6 +62,8 @@
 		justify-content: center;
 		overflow-y: auto;
 		flex-direction: column;
+		position: relative;
+		padding: 20px;
 	}
 
 	.release_date {
@@ -104,4 +107,13 @@
 		border-radius: 2px;
 	}
 
+	.go_back_btn {
+		margin: 20px;
+		background-image: linear-gradient(180deg, #d0368a 0%, #708ad4 60%);
+		color: white;
+		padding: 10px;
+		position: absolute;
+		top:0;
+		left: 0;
+	}
 </style>

@@ -7,9 +7,10 @@ import { page } from '$app/stores';
 	import { moviesList, scrollTopPosition } from '../../stores/moviesList.store';
 	import MovieItem from './MovieItem.svelte';
 	let movieListRef: HTMLDivElement;
-	const dispatch = createEventDispatcher<{ fetchNextPage: boolean }>();
+	const dispatch = createEventDispatcher<{ fetchNextPage: void }>();
 
-	const handleInfiniteScroll = (): void => {
+	$: handleInfiniteScroll = (): void => {
+		console.log('here?', $moviesList)
 		const FETCH_MORE_THRESHOLD = 400;
 		const { scrollHeight, clientHeight, scrollTop } = movieListRef;
 		const bottomScrollOffset = scrollHeight - clientHeight - scrollTop;
@@ -20,7 +21,7 @@ import { page } from '$app/stores';
 			if (shouldFetchMore) {
 				// $moviesList = { ...$moviesList, isLoading: true };
 				// fetchPopularMovieList({ page: $moviesList.page + 1 });
-				dispatch('fetchNextPage', true);
+				dispatch('fetchNextPage');
 			}
 		}
 	};

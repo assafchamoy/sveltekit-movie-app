@@ -1,24 +1,41 @@
 <script type="ts">
 	import { page } from '$app/stores';
-
 	import { onMount } from 'svelte';
-
 	import MovieList from '../components/movies/MovieList.svelte';
 	import type IPopularMoviesResponse from '../interfaces/Movies/popularMovies.response';
 	import { moviesList, resetScrollTopPosition } from '../stores/moviesList.store';
 
 	export let popularMovies: IPopularMoviesResponse;
+	let shouldFetchMore = false;
 
-	$: moviesList.set({
-		page: popularMovies.page,
-		movies: popularMovies.results,
-		isLoading: false,
-		total: popularMovies.total_results
+	onMount(() => {
+		if(!$moviesList?.movies?.length){
+			moviesList.set({
+			   page: popularMovies.page,
+			   movies: popularMovies.results,
+			   isLoading: false,
+			   total: popularMovies.total_results
+		   });
+		}
 	});
 
-	const fetchNextPage = () => {
-		$moviesList = { ...$moviesList, page: $moviesList.page + 1 };
-	};
+	$: nextPage = $moviesList.page + 1;
+
+	$: {
+		if (shouldFetchMore) {
+			shouldFetchMore = false;
+			fetch(`/__data.json?page=${nextPage}`)
+				.then((data) => data.json())
+				.then((res: {popularMovies: IPopularMoviesResponse}) => {
+					moviesList.update((currList) => ({
+						isLoading: false,
+						movies: [...currList.movies, ...res?.popularMovies?.results],
+						page: res.popularMovies.page,
+						total: res.popularMovies.total_results
+					}));
+				});
+		}
+	}
 
 	onMount(() => {
 		resetScrollTopPosition({ pathName: $page.url.pathname, except: true });
@@ -26,9 +43,13 @@
 </script>
 
 <h1 class="title">Popular Movies</h1>
-{#if popularMovies}
-	<MovieList />
-{/if}
+	<MovieList
+		on:fetchNextPage={() => {
+			$moviesList.isLoading = true;
+			console.log('here?')
+			shouldFetchMore = true;
+		}}
+	/>
 
 <style>
 	.title {
