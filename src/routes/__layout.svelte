@@ -9,7 +9,9 @@
 		{ path: '/', name: 'Home' },
 		{ path: '/about', name: 'About' }
 	];
-	let hideSearchOnRoutes = ['movie/[id=integer]'];
+	const hideSearchOnRoutes = ['movie/[id=integer]'];
+
+	$: hideSearchbar = hideSearchOnRoutes.includes(pageRoute);
 
 	$: pageRoute = $page.routeId as string;
 </script>
@@ -21,7 +23,7 @@
 <div class="appContainer">
 	<NavBar {routesList} />
 	<Container>
-		{#if !hideSearchOnRoutes.includes(pageRoute)}
+		{#if !hideSearchbar}
 			<div class="search_container">
 				<SearchBar
 					on:searchValueChange={({ detail: { value } }) => {

@@ -1,14 +1,22 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher<{ movieClick: void }>();
 	import type IMovie from '../../interfaces/Movies/movie.entity';
 	import MovieImage from './MovieImage.svelte';
 	export let movie: IMovie;
 </script>
 
-<div class="movie" on:click={() => goto(`/movie/${movie.id}`)}>
+<div
+	class="movie"
+	on:click={() => {
+		goto(`/movie/${movie.id}`);
+		dispatch('movieClick');
+	}}
+>
 	<h4 class="title">{movie.title}</h4>
-	<a sveltekit:prefetch sveltekit:noscroll href={`/movie/${movie.id}`}>
+	<a sveltekit:prefetch href={`/movie/${movie.id}`}>
 		<MovieImage {movie} />
 	</a>
 	<h4 class="rating">Rate: {movie.vote_average}</h4>

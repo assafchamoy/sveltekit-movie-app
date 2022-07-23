@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
+import { page } from '$app/stores';
 
-	import { moviesList } from '../../stores/moviesList.store';
+	import { createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
+
+	import { moviesList, scrollTopPosition } from '../../stores/moviesList.store';
 	import MovieItem from './MovieItem.svelte';
 	let movieListRef: HTMLDivElement;
 	const dispatch = createEventDispatcher<{ fetchNextPage: boolean }>();
@@ -10,7 +13,7 @@
 		const FETCH_MORE_THRESHOLD = 400;
 		const { scrollHeight, clientHeight, scrollTop } = movieListRef;
 		const bottomScrollOffset = scrollHeight - clientHeight - scrollTop;
-
+		$scrollTopPosition.set($page.url.pathname, movieListRef.scrollTop);
 		if (bottomScrollOffset <= FETCH_MORE_THRESHOLD) {
 			const shouldFetchMore =
 				!$moviesList?.isLoading && $moviesList?.movies?.length < $moviesList?.total;
@@ -21,6 +24,10 @@
 			}
 		}
 	};
+	
+	onMount(() => {
+		movieListRef.scrollTo({top: $scrollTopPosition.get($page.url.pathname)})
+	})
 </script>
 
 <div class="movie_list" bind:this={movieListRef} on:scroll={handleInfiniteScroll}>

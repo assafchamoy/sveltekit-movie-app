@@ -1,7 +1,11 @@
 <script lang="ts">
+import { page } from '$app/stores';
+
+import { onMount } from 'svelte';
+
 	import MovieList from '../../components/movies/MovieList.svelte';
 	import type { ISearchResult } from '../../interfaces/Movies/searchResult.response';
-	import { moviesList } from '../../stores/moviesList.store';
+	import { moviesList, resetScrollTopPosition } from '../../stores/moviesList.store';
 
 	export let searchResults: ISearchResult;
 
@@ -15,6 +19,10 @@
 			});
 		}
 	}
+
+	onMount(() => {
+		resetScrollTopPosition({pathName: $page.url.pathname, except: true})
+	})
 </script>
 
 <MovieList />

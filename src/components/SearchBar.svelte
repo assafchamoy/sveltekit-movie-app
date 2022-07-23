@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	import { createEventDispatcher } from 'svelte';
+	import { onMount } from 'svelte';
 
 	export const debounce: boolean = true;
 	let debounceTimer: NodeJS.Timeout;
@@ -19,6 +22,12 @@
 			dispatchInputChange();
 		}
 	};
+
+	$: {
+		if (inputRef) {
+			inputRef.value = $page.params?.query ?? '';
+		}
+	}
 </script>
 
 <label for="inp" class="inp">
@@ -35,7 +44,6 @@
 
 <style>
 	.inp {
-
 		position: relative;
 		margin: auto;
 		width: 90%;

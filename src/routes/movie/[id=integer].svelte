@@ -22,7 +22,9 @@
 	let productionCountriesNames = movieDetails.production_countries.map((c) => c.name);
 </script>
 
-<a href="/">Go Back</a>
+<button on:click={() => {
+	history.back()
+}}>Go Back</button>
 
 <div class="movie_details_container" in:fade>
 	<h1 class="title">{movieDetails?.title}</h1>
