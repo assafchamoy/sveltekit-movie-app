@@ -1,8 +1,8 @@
 import { get as getStoreVal } from 'svelte/store';
-import type { ServiceError } from '../../interfaces/API/ServiceError.type';
+import type { ServiceError } from '../$IApi/ServiceError.type';
 import { API } from '$lib/api/apiInstance.store';
 import type { RequestHandler } from './__types/[id=integer].js';
-import type { IMovieDetails } from '../../interfaces/Movies/movieDetails.entity';
+import type { IMovieDetails } from '$IMovies/movieDetails.entity';
 
 const APIInstance = getStoreVal(API);
 

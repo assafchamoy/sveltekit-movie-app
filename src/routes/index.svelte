@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import MovieList from '../components/movies/MovieList.svelte';
-	import type IPopularMoviesResponse from '../interfaces/Movies/popularMovies.response';
+	import type IPopularMoviesResponse from '$IMovies/popularMovies.response';
 	import { moviesList, resetScrollTopPosition } from '../stores/moviesList.store';
 
 	export let popularMovies: IPopularMoviesResponse;

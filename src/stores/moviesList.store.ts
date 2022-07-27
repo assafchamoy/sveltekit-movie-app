@@ -1,7 +1,7 @@
 import { page } from '$app/stores';
 import { writable, get } from 'svelte/store';
-import type IMovie from '../interfaces/Movies/movie.entity';
-import type { ISearchedMovie } from '../interfaces/Movies/searchedMovie.entity';
+import type IMovie from '$IMovies/movie.entity';
+import type { ISearchedMovie } from '$IMovies/searchedMovie.entity';
 
 export interface IDisplayedMovies {
 	page: number;

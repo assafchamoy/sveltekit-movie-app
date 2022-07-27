@@ -15,7 +15,7 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import MovieImage from '../../components/movies/MovieImage.svelte';
-	import type { IMovieDetails } from '../../interfaces/Movies/movieDetails.entity';
+	import type { IMovieDetails } from '$IMovies/movieDetails.entity';
 
 	export let movieDetails: IMovieDetails;
 	let productionCountriesNames = movieDetails.production_countries.map((c) => c.name);

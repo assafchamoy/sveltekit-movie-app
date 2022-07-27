@@ -1,5 +1,5 @@
-import type { ServiceError } from '../interfaces/API/ServiceError.type';
-import type IPopularMoviesResponse from '../interfaces/Movies/popularMovies.response';
+import type { ServiceError } from '$IApi/ServiceError.type';
+import type IPopularMoviesResponse from '$IMovies/popularMovies.response';
 import { API } from '$lib/api/apiInstance.store';
 import type { RequestHandler } from './__types/index';
 import { get as getStoreVal } from 'svelte/store';

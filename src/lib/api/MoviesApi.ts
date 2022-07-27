@@ -1,8 +1,8 @@
 import requestHandler from '../../axios';
-import type { ServiceError } from '../../interfaces/API/ServiceError.type';
-import type { IMovieDetails } from '../../interfaces/Movies/movieDetails.entity';
-import type IPopularMoviesResponse from '../../interfaces/Movies/popularMovies.response';
-import type { ISearchResult } from '../../interfaces/Movies/searchResult.response';
+import type { ServiceError } from '$IApi/ServiceError.type';
+import type { IMovieDetails } from '$IMovies/movieDetails.entity';
+import type IPopularMoviesResponse from '$IMovies/popularMovies.response';
+import type { ISearchResult } from '$IMovies/searchResult.response';
 
 interface BaseMoviesParams {
 	language?: 'he' | 'en-US';

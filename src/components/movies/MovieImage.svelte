@@ -1,7 +1,7 @@
 <script lang="ts">
 	import no_image from '$lib/assets/icons/no_image.svg';
-	import type IMovie from '../../interfaces/Movies/movie.entity';
-	import type { IMovieDetails } from '../../interfaces/Movies/movieDetails.entity';
+	import type IMovie from '$IMovies/movie.entity';
+	import type { IMovieDetails } from '$IMovies/movieDetails.entity';
 
 	export let movie: IMovie | IMovieDetails;
 	const baseImgUrl = import.meta.env.VITE_MOVIE_IMAGES_BASE_URL;
