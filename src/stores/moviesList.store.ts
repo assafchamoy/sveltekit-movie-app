@@ -1,18 +1,26 @@
 import { writable } from 'svelte/store';
 import type { IMovie, ISearchedMovie } from '$IMovies';
 
+
+export enum MoviesType {
+	POPULAR = 'popular',
+	SEARCH = 'search'
+}
 export interface IDisplayedMovies {
 	page: number;
 	movies: IMovie[] | ISearchedMovie[];
 	isLoading: boolean;
 	total: number;
+	listType: MoviesType | null;
+	query?: string;
 }
 
 export const moviesList = writable<IDisplayedMovies>({
 	page: 0,
 	movies: [],
 	isLoading: true,
-	total: 0
+	total: 0,
+	listType: null
 });
 
 export const resetMoviesList = () => {
@@ -20,7 +28,8 @@ export const resetMoviesList = () => {
 		page: 0,
 		movies: [],
 		isLoading: true,
-		total: 0
+		total: 0,
+		listType: null
 	});
 };
 

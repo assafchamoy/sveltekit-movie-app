@@ -10,7 +10,6 @@ import { page } from '$app/stores';
 	const dispatch = createEventDispatcher<{ fetchNextPage: void }>();
 
 	$: handleInfiniteScroll = (): void => {
-		console.log('here?', $moviesList)
 		const FETCH_MORE_THRESHOLD = 400;
 		const { scrollHeight, clientHeight, scrollTop } = movieListRef;
 		const bottomScrollOffset = scrollHeight - clientHeight - scrollTop;

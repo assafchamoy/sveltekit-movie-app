@@ -1,32 +1,58 @@
 <script lang="ts">
-import { page } from '$app/stores';
+	import { page } from '$app/stores';
 
-import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 
 	import MovieList from '$Components/movies/MovieList.svelte';
 	import type { ISearchResult } from '$IMovies';
-	import { moviesList, resetMoviesList, resetScrollTopPosition } from '$Stores/moviesList.store';
-
+	import { moviesList, MoviesType, resetScrollTopPosition } from '$Stores/moviesList.store';
 	export let searchResults: ISearchResult;
+	let shouldFetchMore = false;
+
+	const MovieListType = MoviesType.SEARCH;
+
+	onMount(() => {
+		resetScrollTopPosition({ pathName: $page.url.pathname, except: true });
+	});
 
 	$: {
-		if (searchResults) {
+		if ($moviesList.listType !== MovieListType || $moviesList.query !== $page.params.query) {
 			moviesList.set({
 				isLoading: false,
 				movies: searchResults.results,
 				page: searchResults.page,
-				total: searchResults.total_pages
+				total: searchResults.total_results,
+				listType: MovieListType,
+				query: $page.params.query
 			});
 		}
 	}
 
-	onMount(() => {
-		resetScrollTopPosition({pathName: $page.url.pathname, except: true})
-	})
+	$: nextPage = $moviesList.page + 1;
 
-	onDestroy(() => {
-		resetMoviesList();
-	})
+	$: {
+		if (shouldFetchMore) {
+			shouldFetchMore = false;
+			fetch(`/search/${$page.params.query}/__data.json?page=${nextPage}`)
+				.then((data) => data.json())
+				.then((res: { searchResults: ISearchResult }) => {
+					moviesList.update((currList) => ({
+						...currList,
+						isLoading: false,
+						movies: [...currList.movies, ...res.searchResults.results],
+						page: res.searchResults.page,
+						total: res.searchResults.total_results,
+						query: $page.params.query
+					}));
+				});
+		}
+	}
 </script>
+
 <h1 class="title">Search Results</h1>
-<MovieList />
+<MovieList
+	on:fetchNextPage={() => {
+		$moviesList.isLoading = true;
+		shouldFetchMore = true;
+	}}
+/>
