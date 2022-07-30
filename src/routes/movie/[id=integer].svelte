@@ -101,5 +101,11 @@
 		position: absolute;
 		top: 0;
 		left: 0;
+		cursor: pointer;
+		transition: transform 0.09s ease-in-out;
+	}
+
+	.go_back_btn:hover {
+		transform: scale(1.04);
 	}
 </style>
