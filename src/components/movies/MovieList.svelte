@@ -4,7 +4,7 @@ import { page } from '$app/stores';
 	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
 
-	import { moviesList, scrollTopPosition } from '../../stores/moviesList.store';
+	import { moviesList, scrollTopPosition } from '$Stores/moviesList.store';
 	import MovieItem from './MovieItem.svelte';
 	let movieListRef: HTMLDivElement;
 	const dispatch = createEventDispatcher<{ fetchNextPage: void }>();

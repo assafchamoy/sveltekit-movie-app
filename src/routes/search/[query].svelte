@@ -3,9 +3,9 @@ import { page } from '$app/stores';
 
 import { onDestroy, onMount } from 'svelte';
 
-	import MovieList from '../../components/movies/MovieList.svelte';
-	import type { ISearchResult } from '$IMovies/searchResult.response';
-	import { moviesList, resetMoviesList, resetScrollTopPosition } from '../../stores/moviesList.store';
+	import MovieList from '$Components/movies/MovieList.svelte';
+	import type { ISearchResult } from '$IMovies';
+	import { moviesList, resetMoviesList, resetScrollTopPosition } from '$Stores/moviesList.store';
 
 	export let searchResults: ISearchResult;
 

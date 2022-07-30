@@ -1,11 +1,10 @@
-import requestHandler from '../../axios';
+import requestHandler from '.';
 import type { ServiceError } from '$IApi/ServiceError.type';
-import type { IMovieDetails } from '$IMovies/movieDetails.entity';
-import type IPopularMoviesResponse from '$IMovies/popularMovies.response';
-import type { ISearchResult } from '$IMovies/searchResult.response';
+import type { ISearchResult, IPopularMoviesResponse, IMovieDetails } from '$IMovies';
+import { MoviesLanguage } from '$IMovies';
 
 interface BaseMoviesParams {
-	language?: 'he' | 'en-US';
+	language?: MoviesLanguage;
 	page: number;
 }
 
@@ -25,7 +24,7 @@ export default class MoviesApi {
 	 */
 
 	public async fetchMovieDetails({
-		language = 'en-US',
+		language = MoviesLanguage.ENGLISH,
 		...rest
 	}: MovieDetailsParams): Promise<IMovieDetails | ServiceError> {
 		try {
@@ -40,7 +39,7 @@ export default class MoviesApi {
 	}
 
 	public async fetchPopularMovieList({
-		language = 'en-US',
+		language = MoviesLanguage.ENGLISH,
 		...rest
 	}: PopularMoviesParams): Promise<IPopularMoviesResponse | ServiceError> {
 		try {
@@ -55,7 +54,7 @@ export default class MoviesApi {
 	}
 
 	public async searchMovie({
-		language = 'en-US',
+		language = MoviesLanguage.ENGLISH,
 		...rest
 	}: SearchMoviesParams): Promise<ISearchResult | ServiceError> {
 		try {

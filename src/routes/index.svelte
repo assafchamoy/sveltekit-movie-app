@@ -1,9 +1,9 @@
 <script type="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import MovieList from '../components/movies/MovieList.svelte';
-	import type IPopularMoviesResponse from '$IMovies/popularMovies.response';
-	import { moviesList, resetScrollTopPosition } from '../stores/moviesList.store';
+	import MovieList from '$Components/movies/MovieList.svelte';
+	import type { IPopularMoviesResponse } from '$IMovies';
+	import { moviesList, resetScrollTopPosition } from '$Stores/moviesList.store';
 
 	export let popularMovies: IPopularMoviesResponse;
 	let shouldFetchMore = false;

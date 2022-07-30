@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import Container from '../components/Container.svelte';
+	import Container from '$Components/Container.svelte';
 
-	import NavBar, { type Route } from '../components/NavBar.svelte';
-	import SearchBar from '../components/SearchBar.svelte';
+	import NavBar, { type Route } from '$Components/NavBar.svelte';
+	import SearchBar from '$Components/SearchBar.svelte';
 	const routesList: Route[] = [
 		{ path: '/', name: 'Home' },
 		{ path: '/about', name: 'About' }

@@ -11,7 +11,9 @@ const config = {
         adapter: adapter(),
         alias: {
             $IMovies: "src/interfaces/Movies",
-            $IApi: "src//interfaces/api",
+            $IApi: "src/interfaces/api",
+            $Stores: "src/stores",
+            $Components: "src/components",
         }
     }
 };

@@ -3,7 +3,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher<{ movieClick: void }>();
-	import type IMovie from '$IMovies/movie.entity';
+	import type { IMovie } from '$IMovies';
 	import MovieImage from './MovieImage.svelte';
 	export let movie: IMovie;
 </script>

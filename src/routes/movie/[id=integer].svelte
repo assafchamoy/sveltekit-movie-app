@@ -1,24 +1,10 @@
-<!-- <script context="module" lang="ts">
-	import { fetchMovieDetails, moviesDetails } from '../../stores/moviesDetails.store';
-
-	import type { Load } from './__types/[id=integer]';
-
-	export const load: Load = async ({ params }) => {
-		await fetchMovieDetails({ id: params.id });
-		return {
-			props: {
-				movieId: params.id
-			}
-		};
-	};
-</script> -->
 <script lang="ts">
 	import { fade } from 'svelte/transition';
-	import MovieImage from '../../components/movies/MovieImage.svelte';
-	import type { IMovieDetails } from '$IMovies/movieDetails.entity';
+	import MovieImage from '$Components/movies/MovieImage.svelte';
+	import type { IMovieDetails } from '$IMovies';
 
 	export let movieDetails: IMovieDetails;
-	let productionCountriesNames = movieDetails.production_countries.map((c) => c.name);
+	let productionCountriesNames = movieDetails.production_countries.map((country) => country.name);
 </script>
 
 <div class="movie_details_container" in:fade>
@@ -113,7 +99,7 @@
 		color: white;
 		padding: 10px;
 		position: absolute;
-		top:0;
+		top: 0;
 		left: 0;
 	}
 </style>
