@@ -23,6 +23,9 @@
 		justify-content: center;
 		align-items: center;
 		box-shadow: 0px 0 25px -10px #3e18e9;
+		height: var(--nav-bar-height);
+		background-color: white;
+		z-index: 999;
 	}
 
 	a {

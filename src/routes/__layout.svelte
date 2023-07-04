@@ -9,7 +9,7 @@
 		{ path: '/', name: 'Home' },
 		{ path: '/about', name: 'About' }
 	];
-	const hideSearchOnRoutes = ['movie/[id=integer]'];
+	const hideSearchOnRoutes = ['movie/[id=integer]', 'about'];
 
 	$: pageRoute = $page.routeId as string;
 
@@ -37,8 +37,15 @@
 			</div>
 		{/if}
 		<slot />
+
 	</Container>
+	<footer class="foot">
+		<p>
+			Created By <a target="_blank" rel="noopener noreferrer" href="https://github.com/assafchamoy">Assaf Chamoy</a> &copy; 2023
+		</p>
+	</footer>
 </div>
+
 
 <style>
 	@import '../global.css';

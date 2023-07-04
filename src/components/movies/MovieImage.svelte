@@ -10,11 +10,9 @@
 
 <style>
 	.movie_img {
-		width: 300px;
+		height: var(--height, 150px);
+		width: 100%;
 		object-fit: cover;
-		object-position: center;
-		aspect-ratio: 1 / 1;
 		border-radius: 10px;
-		align-self: center;
 	}
 </style>
