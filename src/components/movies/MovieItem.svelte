@@ -16,7 +16,7 @@
 	}}
 >
 	<h4 class="title">{movie.title}</h4>
-	<a sveltekit:prefetch href={`/movie/${movie.id}`}>
+	<a href={`/movie/${movie.id}`}>
 		<MovieImage {movie} />
 	</a>
 	<h4 class="rating">Rate: {movie.vote_average}</h4>

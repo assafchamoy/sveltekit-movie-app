@@ -6,7 +6,7 @@
 	:global(.container) {
         width:100vw;
         /* padding: 20px; */
-        overflow: hidden;
+        overflow-y: auto;
 		height:100%;
 	}
 

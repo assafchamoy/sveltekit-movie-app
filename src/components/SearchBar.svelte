@@ -44,8 +44,7 @@
 	.inp {
 		position: relative;
 		margin: auto;
-		width: 90%;
-		/* max-width: 280px; */
+		width: min(50vw, 50rem);
 		border-radius: 3px;
 		overflow: hidden;
 	}

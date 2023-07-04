@@ -40,7 +40,6 @@
 		gap: 0.5rem;
 		display: flex;
 		flex-direction: column;
-		/* overflow-y: auto; */
 	}
 
 	.movie_details_container {
@@ -70,7 +69,7 @@
 		display: flex;
 		flex-direction: column;
 		font-size: 0.7rem;
-		height: 220px;
+		/* height: 220px; */
 		overflow-y: auto;
 		gap: 10px;
 		/* width: 80vw; */
