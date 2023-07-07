@@ -2,7 +2,6 @@
 	import type { PageData } from './$types';
 	import { fade } from 'svelte/transition';
 	import MovieImage from '$Components/movies/MovieImage.svelte';
-	import type { IMovieDetails } from '$IMovies';
 
 	export let data: PageData;
 	$: ({ movieDetails } = data);

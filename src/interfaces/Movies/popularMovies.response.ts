@@ -1,4 +1,4 @@
-import type IMovie from './movie.entity';
+import type { IMovie } from '$IMovies';
 
 export interface IPopularMoviesResponse {
 	page: number;

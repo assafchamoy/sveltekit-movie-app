@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { createEventDispatcher, onDestroy } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import { onMount } from 'svelte';
 	import { moviesList, scrollTopPosition } from '$Stores/moviesList.store';
 	import MovieItem from './MovieItem.svelte';
