@@ -1,20 +1,17 @@
-import type { ServiceError } from '$IApi/ServiceError.type';
-import type { IPopularMoviesResponse } from '$IMovies';
-import { API } from '$lib/api/apiInstance.store';
-import type { RequestHandler } from './__types/index';
-import { get as getStoreVal } from 'svelte/store';
+import type { ServiceError } from "$IApi/ServiceError.type";
+import type { IPopularMoviesResponse } from "$IMovies";
+import { API } from "$lib/api/apiInstance.store";
+import type { PageServerLoad } from "./$types";
+import { get as getStoreVal } from "svelte/store";
 
 export type GetResponseBody = {
-	popularMovies: IPopularMoviesResponse | ServiceError;
+    popularMovies: IPopularMoviesResponse | ServiceError;
 };
 
 const APIInstance = getStoreVal(API);
 
-export const get: RequestHandler<GetResponseBody> = async ({url: {searchParams}}) => {
-	const page = searchParams.get('page') ?? 1;
-	const popularMovies = await APIInstance.fetchPopularMovieList({ page: +page });
+export const load: PageServerLoad = (async ({ url: { searchParams } }) => {
+    const page = searchParams.get("page") ?? 1;
 
-	return {
-		body: { popularMovies: popularMovies }
-	};
-};
+    return { popularMovies: await APIInstance.fetchPopularMovieList({ page: +page }) };
+}) as PageServerLoad;

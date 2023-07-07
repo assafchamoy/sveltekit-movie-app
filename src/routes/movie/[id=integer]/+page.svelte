@@ -1,10 +1,13 @@
 <script lang="ts">
+	import type { PageData, Errors } from './$types';
 	import { fade } from 'svelte/transition';
 	import MovieImage from '$Components/movies/MovieImage.svelte';
 	import type { IMovieDetails } from '$IMovies';
 
-	export let movieDetails: IMovieDetails;
-	let productionCountriesNames = movieDetails.production_countries.map((country) => country.name);
+	export let data: PageData;
+	$: ({ movieDetails } = data);
+
+	$: productionCountriesNames = movieDetails?.production_countries?.map((country) => country.name);
 </script>
 
 <div class="movie_details_container" in:fade>

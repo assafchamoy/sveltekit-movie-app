@@ -1,12 +1,15 @@
 <script lang="ts">
+	import type { PageData, Errors } from './$types';
 	import { page } from '$app/stores';
-
 	import { onMount } from 'svelte';
-
 	import MovieList from '$Components/movies/MovieList.svelte';
 	import type { ISearchResult } from '$IMovies';
+	import { isServiceError } from '$IApi/ServiceError.type';
 	import { moviesList, MoviesType, resetScrollTopPosition } from '$Stores/moviesList.store';
-	export let searchResults: ISearchResult;
+	
+	export let data: PageData;
+	$: ({ searchResults } = data);
+
 	let shouldFetchMore = false;
 
 	const MovieListType = MoviesType.SEARCH;
@@ -16,7 +19,7 @@
 	});
 
 	$: {
-		if ($moviesList.listType !== MovieListType || $moviesList.query !== $page.params.query) {
+		if (searchResults && !isServiceError(searchResults) && ($moviesList.listType !== MovieListType || $moviesList.query !== $page.params.query)) {
 			moviesList.set({
 				isLoading: false,
 				movies: searchResults.results,
