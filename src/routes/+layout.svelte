@@ -11,7 +11,7 @@
 	];
 	const hideSearchOnRoutes = ['movie/[id=integer]', 'about'];
 
-	$: pageRoute = $page.routeId as string;
+	$: pageRoute = $page.route.id as string;
 
 	$: hideSearchbar = hideSearchOnRoutes.includes(pageRoute);
 </script>
@@ -28,9 +28,9 @@
 				<SearchBar
 					on:searchValueChange={({ detail: { value } }) => {
 						if (value.trim()) {
-							goto(`/search/${value}`, { keepfocus: true });
+							goto(`/search/${value}`, { keepFocus: true });
 						} else {
-							goto('/', { keepfocus: true });
+							goto('/', { keepFocus: true });
 						}
 					}}
 				/>

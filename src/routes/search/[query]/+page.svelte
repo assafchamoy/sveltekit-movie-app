@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { PageData, Errors } from './$types';
+	import type { PageData } from './$types';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import MovieList from '$Components/movies/MovieList.svelte';

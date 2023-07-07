@@ -1,5 +1,5 @@
 <script type="ts">
-	import type { PageData, Errors } from './$types';
+	import type { PageData } from './$types';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import MovieList from '$Components/movies/MovieList.svelte';
@@ -30,25 +30,19 @@
 	$: nextPage = $moviesList.page + 1;
 
 	$: {
-		async function getNextPage() {
-			const request = await fetch(`/api/popularMovies?page=${nextPage}`);
-			const nextMovies = await request.json();
-
-			return nextMovies;
-		}
-
 		if (shouldFetchMore) {
 			shouldFetchMore = false;
-
-			getNextPage().then((res: { popularMovies: IPopularMoviesResponse }) => {
-				moviesList.update((currList) => ({
-					...currList,
-					isLoading: false,
-					movies: [...currList.movies, ...res?.popularMovies?.results],
-					page: res.popularMovies.page,
-					total: res.popularMovies.total_results
-				}));
-			});
+			fetch(`/__data.json?page=${nextPage}`)
+				.then((data) => data.json())
+				.then((res: { popularMovies: IPopularMoviesResponse }) => {
+					moviesList.update((currList) => ({
+						...currList,
+						isLoading: false,
+						movies: [...currList.movies, ...res?.popularMovies?.results],
+						page: res.popularMovies.page,
+						total: res.popularMovies.total_results
+					}));
+				});
 		}
 	}
 </script>
