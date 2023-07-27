@@ -5,7 +5,7 @@
 	import MovieList from '$Components/movies/MovieList.svelte';
 	import type { IPopularMoviesResponse } from '$IMovies';
 	import { moviesList, MoviesType, resetScrollTopPosition } from '$Stores/moviesList.store';
-	import { isServiceError } from '../interfaces/api/ServiceError.type';
+	import { isServiceError } from '$IApi/ServiceError.type';
 
 	export let data: PageData;
 	$: ({ popularMovies } = data);
