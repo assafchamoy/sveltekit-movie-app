@@ -1,5 +1,5 @@
 import requestHandler from '.';
-import type { ServiceError } from '$IApi/ServiceError.type';
+import type { ServiceError } from '$IApi/ServiceError';
 import type { ISearchResult, IPopularMoviesResponse, IMovieDetails } from '$IMovies';
 import { MoviesLanguage } from '$IMovies';
 

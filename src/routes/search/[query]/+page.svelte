@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import MovieList from '$Components/movies/MovieList.svelte';
 	import type { ISearchResult } from '$IMovies';
-	import { isServiceError } from '$IApi/ServiceError.type';
+	import { isServiceError } from '$IApi/ServiceError';
 	import { moviesList, MoviesType, resetScrollTopPosition } from '$Stores/moviesList.store';
 	
 	export let data;
