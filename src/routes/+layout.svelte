@@ -9,10 +9,9 @@
 		{ path: '/', name: 'Home' },
 		{ path: '/about', name: 'About' }
 	];
-	const hideSearchOnRoutes = ['movie/[id=integer]', 'about'];
+	const hideSearchOnRoutes = ['/movie/[id=integer]', '/about'];
 
 	$: pageRoute = $page.route.id as string;
-
 	$: hideSearchbar = hideSearchOnRoutes.includes(pageRoute);
 </script>
 
@@ -36,6 +35,7 @@
 				/>
 			</div>
 		{/if}
+
 		<slot />
 
 	</Container>

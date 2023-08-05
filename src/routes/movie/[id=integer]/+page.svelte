@@ -1,9 +1,8 @@
 <script lang="ts">
-	import type { PageData } from './$types';
 	import { fade } from 'svelte/transition';
 	import MovieImage from '$Components/movies/MovieImage.svelte';
 
-	export let data: PageData;
+	export let data;
 	$: ({ movieDetails } = data);
 
 	$: productionCountriesNames = movieDetails?.production_countries?.map((country) => country.name);

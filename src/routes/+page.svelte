@@ -1,5 +1,4 @@
-<script type="ts">
-	import type { PageData } from './$types';
+<script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import MovieList from '$Components/movies/MovieList.svelte';
@@ -7,7 +6,7 @@
 	import { moviesList, MoviesType, resetScrollTopPosition } from '$Stores/moviesList.store';
 	import { isServiceError } from '$IApi/ServiceError.type';
 
-	export let data: PageData;
+	export let data;
 	$: ({ popularMovies } = data);
 
 	let shouldFetchMore = false;
@@ -32,7 +31,7 @@
 	$: {
 		if (shouldFetchMore) {
 			shouldFetchMore = false;
-			fetch(`/__data.json?page=${nextPage}`)
+			fetch(`/popularMovies?page=${nextPage}`)
 				.then((data) => data.json())
 				.then((res: { popularMovies: IPopularMoviesResponse }) => {
 					moviesList.update((currList) => ({

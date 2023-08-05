@@ -8,4 +8,4 @@ export const load: PageServerLoad = (async ({ params: { id } }) => {
     return {
         movieDetails: await APIInstance.fetchMovieDetails({ id })
     };
-}) as PageServerLoad;
+});
